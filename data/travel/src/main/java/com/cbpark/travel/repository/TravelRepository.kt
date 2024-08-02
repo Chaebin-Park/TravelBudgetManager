@@ -2,10 +2,11 @@ package com.cbpark.travel.repository
 
 import com.cbpark.travel.dao.TravelDao
 import com.cbpark.travel.entity.Travel
+import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class TravelRepository @Inject constructor(private val dao: TravelDao) {
-  suspend fun travels(): List<Travel> = dao.travels()
+  fun travels(): Flow<List<Travel>> = dao.travels()
 
   suspend fun find(name: String): List<Travel> = dao.find(name)
 

@@ -7,6 +7,9 @@ import androidx.lifecycle.viewModelScope
 import com.cbpark.travel.entity.Travel
 import com.cbpark.travel.repository.TravelRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -15,6 +18,9 @@ import javax.inject.Inject
 class TravelViewModel @Inject constructor(
   private val repository: TravelRepository
 ) : ViewModel() {
+
+  val travels: StateFlow<List<Travel>> = repository.travels()
+    .stateIn(viewModelScope, SharingStarted.Lazily, emptyList())
 
   fun insertTravel(travel: Travel) {
     viewModelScope.launch {
@@ -32,10 +38,6 @@ class TravelViewModel @Inject constructor(
     viewModelScope.launch {
       repository.delete(travel)
     }
-  }
-
-  fun getAllTravels(): LiveData<List<Travel>> = liveData {
-    emit(repository.travels())
   }
 
   fun findTravelsByName(name: String): LiveData<List<Travel>> = liveData {

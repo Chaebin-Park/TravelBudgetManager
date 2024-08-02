@@ -6,13 +6,14 @@ import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Update
 import com.cbpark.travel.entity.Travel
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface TravelDao {
   @Query("""
     SELECT * FROM travel
   """)
-  suspend fun travels(): List<Travel>
+  fun travels(): Flow<List<Travel>>
 
   @Query("SELECT * FROM travel WHERE name LIKE :name")
   suspend fun find(name: String): List<Travel>

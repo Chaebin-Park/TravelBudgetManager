@@ -28,6 +28,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
@@ -39,6 +40,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.cbpark.travel.entity.CountryCode
 import com.cbpark.travel.entity.Travel
@@ -71,15 +73,14 @@ data class UpdateTravelState(
 @Composable
 fun TravelPage(
   modifier: Modifier = Modifier,
-  travelViewModel: TravelViewModel = viewModel(),
+  travelViewModel: TravelViewModel = hiltViewModel(),
 ) {
   val context = LocalContext.current
   var showSheet by remember { mutableStateOf(false) }
   var deleteTravelState by remember { mutableStateOf(DeleteTravelState()) }
   var updateTravelState by remember { mutableStateOf(UpdateTravelState()) }
 
-  val travels by travelViewModel.getAllTravels().observeAsState(initial = emptyList())
-
+  val travels by travelViewModel.travels.collectAsState()
 
   val insertTravel: (Travel) -> Unit = { travel: Travel ->
     if (travel.name.isNotEmpty()) {
