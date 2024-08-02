@@ -41,6 +41,6 @@ class TravelViewModel @Inject constructor(
   }
 
   fun findTravelsByName(name: String): LiveData<List<Travel>> = liveData {
-    emit(repository.find(name))
+    emit(repository.findByName(name))
   }
 }

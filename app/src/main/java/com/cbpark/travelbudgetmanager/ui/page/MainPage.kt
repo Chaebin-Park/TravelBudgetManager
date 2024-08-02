@@ -30,7 +30,6 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -39,13 +38,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.DpOffset
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.lifecycle.viewmodel.compose.viewModel
 import com.cbpark.travel.entity.CountryCode
 import com.cbpark.travel.entity.Travel
 import com.cbpark.travel.viewmodel.TravelViewModel
-import com.cbpark.travelbudgetmanager.R
 import com.cbpark.travelbudgetmanager.TravelActivity
 import com.cbpark.travelbudgetmanager.ui.component.TopBar
 import com.cbpark.travelbudgetmanager.ui.component.dialog.CustomAlertDialog
@@ -191,6 +189,7 @@ fun TravelItem(
     elevation = CardDefaults.cardElevation(3.dp),
     onClick = {
       val intent = Intent(context, TravelActivity::class.java)
+      intent.putExtra("travel_id", travel.id)
       context.startActivity(intent)
     }
   ) {
@@ -202,7 +201,7 @@ fun TravelItem(
       Column(
         modifier = Modifier.padding(Paddings.large)
       ) {
-        Row {
+        Box{
           Row(
             modifier = Modifier
               .fillMaxWidth()
@@ -220,7 +219,10 @@ fun TravelItem(
             }
           }
           DropdownMenu(
-            modifier = Modifier.background(color = Color.White),
+            modifier = Modifier
+              .background(color = Color.White)
+              .align(alignment = Alignment.TopEnd),
+            offset = DpOffset(32.dp, 0.dp),
             expanded = expanded,
             onDismissRequest = { expanded = false }
           ) {
@@ -256,14 +258,6 @@ fun TravelItem(
     }
   }
 }
-
-private fun flagImage(countryCode: String): Int =
-  when (CountryCode.find(code = countryCode)) {
-    CountryCode.USA -> R.drawable.usa_flag
-    CountryCode.Japan -> R.drawable.japan_flag
-    CountryCode.Mongolia -> R.drawable.mongolia_flag
-    CountryCode.Vietnam -> R.drawable.vietnam_flag
-  }
 
 @Preview
 @Composable

@@ -4,6 +4,7 @@ plugins {
   alias(libs.plugins.jetbrains.kotlin.android)
   id("dagger.hilt.android.plugin")
   kotlin("plugin.serialization") version "1.7.0"
+  id("kotlin-parcelize")
 }
 
 android {

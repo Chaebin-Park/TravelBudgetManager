@@ -8,7 +8,9 @@ import javax.inject.Inject
 class TravelRepository @Inject constructor(private val dao: TravelDao) {
   fun travels(): Flow<List<Travel>> = dao.travels()
 
-  suspend fun find(name: String): List<Travel> = dao.find(name)
+  suspend fun findByName(name: String): List<Travel> = dao.findByName(name)
+
+  suspend fun findById(id: Int): Travel = dao.findById(id)
 
   suspend fun delete(travel: Travel) = dao.delete(travel)
 

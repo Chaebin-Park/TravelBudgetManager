@@ -15,8 +15,11 @@ interface TravelDao {
   """)
   fun travels(): Flow<List<Travel>>
 
-  @Query("SELECT * FROM travel WHERE name LIKE :name")
-  suspend fun find(name: String): List<Travel>
+  @Query("SELECT * FROM travel WHERE name LIKE '%' || :name || '%'")
+  suspend fun findByName(name: String): List<Travel>
+
+  @Query("SELECT * FROM travel WHERE id LIKE :id LIMIT 1")
+  suspend fun findById(id: Int): Travel
 
   @Delete
   suspend fun delete(travel: Travel)
