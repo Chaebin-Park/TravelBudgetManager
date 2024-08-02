@@ -5,7 +5,7 @@ import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Update
-import com.cbpark.travel.entities.Travel
+import com.cbpark.travel.entity.Travel
 
 @Dao
 interface TravelDao {
@@ -14,11 +14,8 @@ interface TravelDao {
   """)
   suspend fun travels(): List<Travel>
 
-  @Query("""
-    SELECT * FROM travel
-    WHERE id LIKE :id
-  """)
-  suspend fun find(id: String): List<Travel>
+  @Query("SELECT * FROM travel WHERE name LIKE :name")
+  suspend fun find(name: String): List<Travel>
 
   @Delete
   suspend fun delete(travel: Travel)

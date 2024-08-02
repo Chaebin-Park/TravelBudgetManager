@@ -2,7 +2,6 @@ package com.cbpark.travelbudgetmanager.ui.page
 
 import android.content.Intent
 import android.widget.Toast
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -18,7 +17,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.MoreVert
@@ -32,24 +30,21 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.alpha
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.cbpark.travel.entities.CountryCode
-import com.cbpark.travel.entities.Travel
+import com.cbpark.travel.entity.CountryCode
+import com.cbpark.travel.entity.Travel
 import com.cbpark.travel.viewmodel.TravelViewModel
+import com.cbpark.travelbudgetmanager.App
 import com.cbpark.travelbudgetmanager.R
 import com.cbpark.travelbudgetmanager.TravelActivity
 import com.cbpark.travelbudgetmanager.ui.component.TopBar
@@ -85,10 +80,12 @@ fun TravelPage(
   var deleteTravelState by remember { mutableStateOf(DeleteTravelState()) }
   var updateTravelState by remember { mutableStateOf(UpdateTravelState()) }
 
-  val travels by travelViewModel.travels.collectAsState()
+  val travels by travelViewModel.getAllTravels().observeAsState(initial = emptyList())
+
+
   val insertTravel: (Travel) -> Unit = { travel: Travel ->
     if (travel.name.isNotEmpty()) {
-      travelViewModel.insert(travel)
+      travelViewModel.insertTravel(travel)
     } else {
       Toast.makeText(context, "여행 타이틀을 입력 하세요", Toast.LENGTH_SHORT).show()
     }
@@ -97,13 +94,13 @@ fun TravelPage(
     updateTravelState = UpdateTravelState(
       showDialog = true,
       originTravel = travel,
-      update = { newTravel -> travelViewModel.update(newTravel) }
+      update = { newTravel -> travelViewModel.updateTravel(newTravel) }
     )
   }
   val deleteTravel: (Travel) -> Unit = { travel: Travel ->
     deleteTravelState = DeleteTravelState(
       showDialog = true,
-      delete = { travelViewModel.delete(travel) }
+      delete = { travelViewModel.deleteTravel(travel) }
     )
   }
 
@@ -195,7 +192,6 @@ fun TravelItem(
     elevation = CardDefaults.cardElevation(3.dp),
     onClick = {
       val intent = Intent(context, TravelActivity::class.java)
-
       context.startActivity(intent)
     }
   ) {
@@ -204,16 +200,6 @@ fun TravelItem(
         .background(color = Tertiary)
         .fillMaxWidth()
     ) {
-      Image(
-        painter = painterResource(id = flagImage(travel.countryCode)),
-        contentDescription = null,
-        contentScale = ContentScale.FillWidth,
-        modifier = Modifier
-          .fillMaxSize()
-          .align(Alignment.Center)
-          .clip(RoundedCornerShape(8.dp))
-          .alpha(0.2f)
-      )
       Column(
         modifier = Modifier.padding(Paddings.large)
       ) {

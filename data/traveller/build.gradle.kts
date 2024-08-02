@@ -1,4 +1,5 @@
 plugins {
+  id("com.google.devtools.ksp")
   alias(libs.plugins.android.library)
   alias(libs.plugins.jetbrains.kotlin.android)
 }
@@ -30,6 +31,7 @@ android {
 }
 
 dependencies {
+  implementation(project(":data:travel"))
 
   implementation(libs.androidx.core.ktx)
   implementation(libs.androidx.appcompat)
@@ -37,4 +39,32 @@ dependencies {
   testImplementation(libs.junit)
   androidTestImplementation(libs.androidx.junit)
   androidTestImplementation(libs.androidx.espresso.core)
+
+
+  implementation(libs.androidx.room.runtime)
+  implementation(libs.androidx.room.ktx)
+  implementation(libs.androidx.room.paging)
+  ksp(libs.androidx.room.compiler)
+  annotationProcessor(libs.androidx.room.compiler)
+  testImplementation(libs.androidx.room.testing)
+
+  implementation(libs.symbol.processing.api)
+
+  // Hilt Dagger
+  implementation(libs.bundles.hilt.dagger)
+  ksp(libs.bundles.hilt.dagger.compiler)
+
+  // Serialization
+  implementation(kotlin("stdlib"))
+  implementation(libs.kotlinx.serialization.json)
+
+  // LiveData
+  implementation(libs.androidx.lifecycle.viewmodel.ktx)
+  implementation(libs.androidx.lifecycle.viewmodel.compose)
+  implementation(libs.androidx.lifecycle.livedata.ktx)
+  implementation(libs.androidx.lifecycle.runtime.ktx.v284)
+  implementation(libs.androidx.lifecycle.runtime.compose)
+  implementation(libs.androidx.lifecycle.viewmodel.savedstate)
+  ksp(libs.androidx.lifecycle.compiler)
+
 }

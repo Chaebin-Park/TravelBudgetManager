@@ -1,4 +1,4 @@
-package com.cbpark.travel.entities
+package com.cbpark.travel.entity
 
 
 enum class CountryCode(val code: String, val currency: String) {

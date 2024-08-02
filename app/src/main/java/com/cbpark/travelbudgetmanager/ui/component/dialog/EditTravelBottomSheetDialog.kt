@@ -26,8 +26,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.cbpark.travel.entities.CountryCode
-import com.cbpark.travel.entities.Travel
+import com.cbpark.travel.entity.CountryCode
+import com.cbpark.travel.entity.Travel
 import com.cbpark.travelbudgetmanager.ui.component.button.PrimaryButton
 import com.cbpark.travelbudgetmanager.ui.component.datepicker.CustomDatePicker
 import com.cbpark.travelbudgetmanager.ui.component.text.BoldText

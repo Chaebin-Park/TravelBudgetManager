@@ -1,6 +1,6 @@
 package com.cbpark.travel.repository
 
-import com.cbpark.travel.entities.Travel
+import com.cbpark.travel.entity.Travel
 
 interface TravelRepository {
   suspend fun travels(): List<Travel>

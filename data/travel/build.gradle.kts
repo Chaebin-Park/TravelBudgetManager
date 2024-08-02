@@ -55,4 +55,14 @@ dependencies {
   // Serialization
   implementation(kotlin("stdlib"))
   implementation(libs.kotlinx.serialization.json)
+
+  // LiveData
+  implementation(libs.androidx.lifecycle.viewmodel.ktx)
+  implementation(libs.androidx.lifecycle.viewmodel.compose)
+  implementation(libs.androidx.lifecycle.livedata.ktx)
+  implementation(libs.androidx.lifecycle.runtime.ktx.v284)
+  implementation(libs.androidx.lifecycle.runtime.compose)
+  implementation(libs.androidx.lifecycle.viewmodel.savedstate)
+  ksp(libs.androidx.lifecycle.compiler)
+
 }
