@@ -26,14 +26,22 @@ object AppModule {
     ).build()
 
   @Provides
-  fun provideTravelDao(db: AppDatabase): TravelDao = db.travelDao()
+  fun provideTravelDao(db: AppDatabase): TravelDao {
+    return db.travelDao()
+  }
 
   @Provides
-  fun provideTravellerDao(db:AppDatabase): TravellerDao = db.travellerDao()
+  fun provideTravellerDao(db:AppDatabase): TravellerDao {
+    return db.travellerDao()
+  }
 
   @Provides
-  fun provideExpenseDao(db: AppDatabase): ExpenseDao = db.expenseDao()
+  fun provideExpenseDao(db: AppDatabase): ExpenseDao {
+    return db.expenseDao()
+  }
 
   @Provides
-  fun provideTravellerExpenseDao(db: AppDatabase): TravellerExpenseDao = db.travellerExpenseDao()
+  fun provideTravellerExpenseDao(db: AppDatabase): TravellerExpenseDao {
+    return db.travellerExpenseDao()
+  }
 }

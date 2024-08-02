@@ -10,7 +10,7 @@ import com.cbpark.traveller_expense.entity.TravellerExpenseCrossRef
 data class TravellerWithExpenses(
   @Embedded val traveller: Traveller,
   @Relation(
-    parentColumn = "id",
+    parentColumn = "traveller_id",
     entityColumn = "expense_id",
     associateBy = Junction(TravellerExpenseCrossRef::class)
   )

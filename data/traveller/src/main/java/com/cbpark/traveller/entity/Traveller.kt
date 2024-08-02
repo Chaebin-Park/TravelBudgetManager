@@ -17,7 +17,11 @@ import kotlinx.serialization.SerialName
   )]
 )
 data class Traveller(
-  @PrimaryKey(autoGenerate = true) val id: Int = 0,
+  @PrimaryKey(autoGenerate = true)
+  @ColumnInfo("traveller_id")
+  @SerialName("traveller_id")
+  val id: Int = 0,
+
   @ColumnInfo(name = "travel_id") val travelId: Int,
   @SerialName("name") val name: String,
   @SerialName("budget") val budget: Double = 0.0

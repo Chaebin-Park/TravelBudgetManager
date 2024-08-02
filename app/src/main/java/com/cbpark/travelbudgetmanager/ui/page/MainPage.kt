@@ -28,7 +28,6 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
@@ -44,7 +43,6 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.cbpark.travel.entity.CountryCode
 import com.cbpark.travel.entity.Travel
 import com.cbpark.travel.viewmodel.TravelViewModel
-import com.cbpark.travelbudgetmanager.App
 import com.cbpark.travelbudgetmanager.R
 import com.cbpark.travelbudgetmanager.TravelActivity
 import com.cbpark.travelbudgetmanager.ui.component.TopBar

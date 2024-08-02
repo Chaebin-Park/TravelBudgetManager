@@ -9,8 +9,8 @@ import com.cbpark.traveller.entity.Traveller
 @Entity(
   primaryKeys = ["traveller_id", "expense_id"],
   foreignKeys = [
-    ForeignKey(entity = Traveller::class, parentColumns = ["id"], childColumns = ["traveller_id"]),
-    ForeignKey(entity = Expense::class, parentColumns = ["id"], childColumns = ["expense_id"])
+    ForeignKey(entity = Traveller::class, parentColumns = ["traveller_id"], childColumns = ["traveller_id"]),
+    ForeignKey(entity = Expense::class, parentColumns = ["expense_id"], childColumns = ["expense_id"])
   ]
 )
 data class TravellerExpenseCrossRef(

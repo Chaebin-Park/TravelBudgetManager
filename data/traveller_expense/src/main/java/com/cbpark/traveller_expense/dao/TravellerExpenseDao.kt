@@ -14,10 +14,10 @@ interface TravellerExpenseDao {
   suspend fun insert(travellerExpenseCrossRef: TravellerExpenseCrossRef)
 
   @Transaction
-  @Query("SELECT * FROM traveller WHERE id = :travellerId")
+  @Query("SELECT * FROM traveller WHERE traveller_id = :travellerId")
   suspend fun travellerWithExpenses(travellerId: Int): List<TravellerWithExpenses>
 
   @Transaction
-  @Query("SELECT * FROM expense WHERE id = :expenseId")
+  @Query("SELECT * FROM expense WHERE expense_id = :expenseId")
   suspend fun expenseWithTravellers(expenseId: Int): List<ExpenseWithTravellers>
 }
