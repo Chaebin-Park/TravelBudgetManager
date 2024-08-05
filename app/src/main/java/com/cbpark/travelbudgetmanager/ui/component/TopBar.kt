@@ -79,3 +79,23 @@ private fun TopBarPrev() {
     )
   }
 }
+
+@Preview
+@Composable
+private fun TopBarPrev3() {
+  TravelBudgetManagerTheme {
+    TopBar(
+      navigationIcon = {
+        IconButton(onClick = {  }) {
+          Icon(imageVector = Icons.Default.Add, contentDescription = "Add icon")
+        }
+      },
+      optionalIcon = {
+        IconButton(onClick = {  }) {
+          Icon(imageVector = Icons.Default.Add, contentDescription = "Add icon")
+        }
+      }
+    )
+  }
+}
+

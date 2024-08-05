@@ -125,7 +125,6 @@ fun TravelBottomSheetDialog(
           modalBottomSheetState.hide()
         }.invokeOnCompletion {
           val travel = Travel(
-            id = Random.nextInt(),
             countryCode = countryCode.code,
             name = travelTitle.trim(),
             currency = countryCode.currency,

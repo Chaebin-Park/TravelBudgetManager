@@ -1,24 +1,25 @@
 package com.cbpark.travelbudgetmanager
 
-import android.content.Intent
-import android.os.Build
 import android.os.Bundle
-import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.lifecycle.Observer
-import com.cbpark.travel.entity.Travel
+import androidx.compose.ui.unit.dp
 import com.cbpark.travel.viewmodel.SearchTravelViewModel
-import com.cbpark.travel.viewmodel.TravelViewModel
+import com.cbpark.travelbudgetmanager.ui.component.TopBar
 import com.cbpark.travelbudgetmanager.ui.page.TravelPage
 import com.cbpark.travelbudgetmanager.ui.theme.TravelBudgetManagerTheme
 import dagger.hilt.android.AndroidEntryPoint
@@ -36,9 +37,25 @@ class TravelActivity : ComponentActivity() {
 
     setContent {
       TravelBudgetManagerTheme {
-        TravelPage(
-          searchTravelViewModel = travelViewModel
-        )
+        Scaffold (
+          topBar = { TopBar(
+            navigationIcon = {
+              IconButton(onClick = { finish() }) {
+                Icon(imageVector = Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Add icon")
+              }
+            }
+          ) }
+        ) { paddingValue ->
+          val travel by travelViewModel.travel.collectAsState()
+
+          Box(modifier = Modifier.padding(paddingValue)) {
+            travel?.let {
+              TravelPage(it)
+            } ?: run {
+              Text(text = "Loading...", modifier = Modifier.fillMaxSize().padding(16.dp))
+            }
+          }
+        }
       }
     }
   }
