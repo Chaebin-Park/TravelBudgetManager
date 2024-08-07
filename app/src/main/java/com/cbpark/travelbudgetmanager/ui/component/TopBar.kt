@@ -5,10 +5,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.ArrowBack
-import androidx.compose.material.icons.automirrored.filled.KeyboardArrowLeft
 import androidx.compose.material.icons.filled.Add
-import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -19,8 +16,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
-import com.cbpark.travelbudgetmanager.ui.component.text.TitleText
-import com.cbpark.travelbudgetmanager.ui.theme.TravelBudgetManagerTheme
+import com.cbpark.ui.text.TitleText
+import com.cbpark.ui.theme.CustomTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -49,7 +46,7 @@ fun TopBar(
 @Preview
 @Composable
 private fun TopBarPrev2() {
-  TravelBudgetManagerTheme {
+  CustomTheme {
     TopBar(
       optionalIcon = {
         Row {
@@ -69,7 +66,7 @@ private fun TopBarPrev2() {
 @Preview
 @Composable
 private fun TopBarPrev() {
-  TravelBudgetManagerTheme {
+  CustomTheme {
     TopBar(
       optionalIcon = {
         IconButton(onClick = {  }) {
@@ -83,7 +80,7 @@ private fun TopBarPrev() {
 @Preview
 @Composable
 private fun TopBarPrev3() {
-  TravelBudgetManagerTheme {
+  CustomTheme {
     TopBar(
       navigationIcon = {
         IconButton(onClick = {  }) {

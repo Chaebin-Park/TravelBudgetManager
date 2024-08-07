@@ -21,7 +21,7 @@ import androidx.compose.ui.unit.dp
 import com.cbpark.travel.viewmodel.SearchTravelViewModel
 import com.cbpark.travelbudgetmanager.ui.component.TopBar
 import com.cbpark.travelbudgetmanager.ui.page.TravelPage
-import com.cbpark.travelbudgetmanager.ui.theme.TravelBudgetManagerTheme
+import com.cbpark.ui.theme.CustomTheme
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -36,7 +36,7 @@ class TravelActivity : ComponentActivity() {
     travelViewModel.findTravelById(intentTravelId)
 
     setContent {
-      TravelBudgetManagerTheme {
+      CustomTheme {
         Scaffold (
           topBar = { TopBar(
             navigationIcon = {

@@ -7,7 +7,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import com.cbpark.travel.viewmodel.TravelViewModel
 import com.cbpark.travelbudgetmanager.ui.page.TravelPage
-import com.cbpark.travelbudgetmanager.ui.theme.TravelBudgetManagerTheme
+import com.cbpark.ui.theme.CustomTheme
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -18,7 +18,7 @@ class MainActivity : ComponentActivity() {
     super.onCreate(savedInstanceState)
     enableEdgeToEdge()
     setContent {
-      TravelBudgetManagerTheme {
+      CustomTheme {
         TravelPage(
           travelViewModel = travelViewModel
         )

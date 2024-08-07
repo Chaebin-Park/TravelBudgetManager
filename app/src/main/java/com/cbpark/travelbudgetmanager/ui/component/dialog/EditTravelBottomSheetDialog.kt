@@ -28,13 +28,13 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.cbpark.travel.entity.CountryCode
 import com.cbpark.travel.entity.Travel
-import com.cbpark.travelbudgetmanager.ui.component.button.PrimaryButton
-import com.cbpark.travelbudgetmanager.ui.component.datepicker.CustomDatePicker
-import com.cbpark.travelbudgetmanager.ui.component.text.BoldText
-import com.cbpark.travelbudgetmanager.ui.component.text.PrimaryText
-import com.cbpark.travelbudgetmanager.ui.component.textfield.PrimaryOutlinedTextField
-import com.cbpark.travelbudgetmanager.ui.theme.Paddings
-import com.cbpark.travelbudgetmanager.ui.theme.TravelBudgetManagerTheme
+import com.cbpark.ui.button.PrimaryButton
+import com.cbpark.ui.datepicker.CustomDatePicker
+import com.cbpark.ui.text.BoldText
+import com.cbpark.ui.text.PrimaryText
+import com.cbpark.ui.textfield.PrimaryOutlinedTextField
+import com.cbpark.ui.theme.Paddings
+import com.cbpark.ui.theme.CustomTheme
 import kotlinx.coroutines.launch
 import java.time.LocalDate
 
@@ -102,7 +102,9 @@ fun EditTravelBottomSheetDialog(
       )
 
       Row (
-        modifier = Modifier.padding(bottom = Paddings.medium).fillMaxWidth(),
+        modifier = Modifier
+          .padding(bottom = Paddings.medium)
+          .fillMaxWidth(),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceEvenly
       ) {
@@ -116,21 +118,24 @@ fun EditTravelBottomSheetDialog(
       }
 
       Spacer(modifier = Modifier.height(Paddings.medium))
-      PrimaryButton(text = "여행 수정") {
-        scope.launch {
-          modalBottomSheetState.hide()
-        }.invokeOnCompletion {
-          val travel = originTravel.copy(
-            countryCode = countryCode.code,
-            name = travelTitle.trim(),
-            currency = countryCode.currency,
-            startDate = startDate,
-            endDate = endDate
-          )
-          onConfirm(travel)
-          onCancel()
-        }
-      }
+      PrimaryButton(
+        onClick = {
+          scope.launch {
+            modalBottomSheetState.hide()
+          }.invokeOnCompletion {
+            val travel = originTravel.copy(
+              countryCode = countryCode.code,
+              name = travelTitle.trim(),
+              currency = countryCode.currency,
+              startDate = startDate,
+              endDate = endDate
+            )
+            onConfirm(travel)
+            onCancel()
+          }
+        },
+        content = { PrimaryText(text = "여행 수정")},
+      )
     }
   }
 }
@@ -138,7 +143,7 @@ fun EditTravelBottomSheetDialog(
 @Preview
 @Composable
 private fun EditTravelBottomSheetDialogPrev() {
-  TravelBudgetManagerTheme {
+  CustomTheme {
     EditTravelBottomSheetDialog(
       originTravel = Travel(),
       onConfirm = {},

@@ -49,12 +49,12 @@ import com.cbpark.travelbudgetmanager.ui.component.TopBar
 import com.cbpark.travelbudgetmanager.ui.component.dialog.CustomAlertDialog
 import com.cbpark.travelbudgetmanager.ui.component.dialog.EditTravelBottomSheetDialog
 import com.cbpark.travelbudgetmanager.ui.component.dialog.TravelBottomSheetDialog
-import com.cbpark.travelbudgetmanager.ui.component.text.PrimaryText
-import com.cbpark.travelbudgetmanager.ui.component.text.SmallText
-import com.cbpark.travelbudgetmanager.ui.component.text.TitleText
-import com.cbpark.travelbudgetmanager.ui.theme.Paddings
-import com.cbpark.travelbudgetmanager.ui.theme.Tertiary
-import com.cbpark.travelbudgetmanager.ui.theme.TravelBudgetManagerTheme
+import com.cbpark.ui.text.PrimaryText
+import com.cbpark.ui.text.SmallText
+import com.cbpark.ui.text.TitleText
+import com.cbpark.ui.theme.CustomTheme
+import com.cbpark.ui.theme.Paddings
+import com.cbpark.ui.theme.Tertiary
 import java.time.format.DateTimeFormatter
 
 data class DeleteTravelState(
@@ -271,7 +271,7 @@ private fun TravelPagePrev() {
     Travel(0, CountryCode.Mongolia.code, "Test6", "USD"),
     Travel(0, CountryCode.Mongolia.code, "Test7", "USD"),
   )
-  TravelBudgetManagerTheme {
+  CustomTheme {
     TravelPage(
       travels = testList,
       updateTravel = {},

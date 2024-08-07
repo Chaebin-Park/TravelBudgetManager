@@ -18,7 +18,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import com.cbpark.travel.entity.Travel
-import com.cbpark.travelbudgetmanager.ui.component.text.TitleText
+import com.cbpark.ui.button.TestButton
+import com.cbpark.ui.text.TitleText
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalFoundationApi::class)
@@ -60,6 +61,7 @@ fun TravellerPage(
 ) {
   Column {
     TitleText(text = "Traveller Page")
+    TestButton(modifier)
   }
 }
 
@@ -101,7 +103,7 @@ fun NavigationBar(pagerState: PagerState, travel: Travel) {
       ) {
         when (page) {
           0 -> {
-            TravellerPage(travel = travel)
+            Text(text = "Traveller")
           }
 
           1 -> {

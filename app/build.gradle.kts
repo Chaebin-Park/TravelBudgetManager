@@ -56,6 +56,7 @@ dependencies {
   implementation(project(":data:module"))
   implementation(project(":data:traveller"))
   implementation(project(":data:traveller_expense"))
+  implementation(project(":core:ui"))
 
   implementation(libs.androidx.core.ktx)
   implementation(libs.androidx.lifecycle.runtime.ktx)
