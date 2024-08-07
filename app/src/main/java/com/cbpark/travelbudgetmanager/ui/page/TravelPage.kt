@@ -9,7 +9,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.PagerState
 import androidx.compose.foundation.pager.rememberPagerState
-import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -18,8 +17,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import com.cbpark.travel.entity.Travel
-import com.cbpark.ui.button.TestButton
+import com.cbpark.ui.button.PagerButton
+import com.cbpark.ui.button.PrimaryButton
+import com.cbpark.ui.text.PrimaryText
 import com.cbpark.ui.text.TitleText
+import com.cbpark.ui.theme.Secondary
+import com.cbpark.ui.theme.Tertiary
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalFoundationApi::class)
@@ -61,7 +64,6 @@ fun TravellerPage(
 ) {
   Column {
     TitleText(text = "Traveller Page")
-    TestButton(modifier)
   }
 }
 
@@ -90,28 +92,28 @@ fun NavigationBar(pagerState: PagerState, travel: Travel) {
     horizontalArrangement = Arrangement.SpaceEvenly
   ) {
     repeat(pagerState.pageCount) { page ->
-      Button(
+      PagerButton(
         onClick = {
           coroutineScope.launch {
             pagerState.animateScrollToPage(page)
           }
         },
-        colors = ButtonDefaults.buttonColors(
-          containerColor = if (pagerState.currentPage == page) Color.Gray else Color.LightGray
+        buttonColors = ButtonDefaults.buttonColors(
+          containerColor = if (pagerState.currentPage == page) Secondary else Color.LightGray
         ),
         modifier = Modifier.weight(1f)
       ) {
         when (page) {
           0 -> {
-            Text(text = "Traveller")
+            PrimaryText(text = "Traveller")
           }
 
           1 -> {
-            Text(text = "Expense")
+            PrimaryText(text = "Expense")
           }
 
           2 -> {
-            Text(text = "Total")
+            PrimaryText(text = "Total")
           }
         }
       }
